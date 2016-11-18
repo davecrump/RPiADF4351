@@ -8,7 +8,7 @@
 #include <sys/ioctl.h>
 #include <linux/types.h>
 #include <linux/spi/spidev.h>
-
+#include <wiringPi.h>
 #include "adf4351.h"
 
 adf4350_init_param MyAdf=
@@ -61,7 +61,7 @@ uint32_t registers[6] =  {0x4580A8, 0x80080C9, 0x4E42, 0x4B3, 0xBC803C, 0x580005
 
 int main(int argc, char *argv[])
 {
-	int wiringPiSetup(void);
+	if (wiringPiSetup() == -1);
 
 	if (strcmp(argv[1], "off") == 0)
 	{
