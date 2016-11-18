@@ -158,14 +158,13 @@ int32_t adf4350_write(uint32_t data)
 {
 	// Nominate pins using WiringPi numbers
 
-	uint8_t LE_4351_GPIO = 27;
-	uint8_t CLK_4351_GPIO = 25;
-	uint8_t DATA_4351_GPIO = 28;
+	// LE   pin 27 wPi 30
+	// CLK  pin 29 wPi 21
+	// Data pin 31 wPi 22
 
-	// Kick  wiringPi into action.  Essential!
-
-	if (wiringPiSetup () == -1)
-	 printf("Wiring Pi not set up ");
+	uint8_t LE_4351_GPIO = 30;
+	uint8_t CLK_4351_GPIO = 21;
+	uint8_t DATA_4351_GPIO = 22;
 
 	// Set all nominated pins to outputs
 
@@ -187,7 +186,6 @@ int32_t adf4350_write(uint32_t data)
 	// Initialise loop
 
 	uint16_t i;
-	uint16_t j;
 
 	// Send all 32 bits
 
@@ -203,13 +201,13 @@ int32_t adf4350_write(uint32_t data)
 		// Pulse clock
 
 		digitalWrite(CLK_4351_GPIO, HIGH);
-
+		delay(1);
 		digitalWrite(CLK_4351_GPIO, LOW);
-
+		delay(1)
+		
 		// shift data left so next bit will be leftmost
 
 		data <<= 1;
-		for(j = 0; j<255; j++);
 	}
 
 	//Set ADF4351 LE high
